@@ -1,0 +1,45 @@
+/* COLORS
+    #FFFCF2
+    #CCC5B9
+    #403D39
+    #252422
+    #EB5E28
+*/
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #EB5E28;
+}
+
+.wrapper > * {
+    margin-bottom: 10px;
+}
+
+.logoImg {
+    margin-right: 10px;
+    height: 7vh;
+}
+
+.logo {
+    font-weight: normal;
+    color: #252422;
+    margin-bottom: 5px;
+}
+
+@media (min-width: 700px) {
+    .wrapper {
+        flex-direction: row;
+    }
+
+    .wrapper > * {
+        margin-bottom: 0;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+}
