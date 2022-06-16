@@ -1,0 +1,30 @@
+.modalWrapper {
+    min-width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal {
+    text-align: center;
+    padding: 5% 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 252, 242, 0.8);
+    color: #252422;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px -2px #FFFCF2;
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+}

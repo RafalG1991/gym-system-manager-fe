@@ -1,0 +1,25 @@
+.btn {
+    background-color: #252422;
+    color: #FFFCF2;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btnDisabled {
+    background-color: #949494;
+    color: #FFFCF2;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+.btn:hover {
+    background-color: #EB5E28;
+}
