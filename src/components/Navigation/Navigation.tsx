@@ -9,11 +9,9 @@ export const Navigation = () => {
 
   return (
     <nav className={classes.navigation}>
-      <NavLink to='/' className={({ isActive }) => isActive ? classes.activeLink : classes.inactiveLink}>Map</NavLink>
       {
         user ? (
           <>
-            <NavLink to='/add' className={({ isActive }) => isActive ? classes.activeLink : classes.inactiveLink}>Add an advertisement</NavLink>
             <NavLink to='/' onClick={signOut} className={classes.inactiveLink}>Sign out</NavLink>
           </>
         ) : (
