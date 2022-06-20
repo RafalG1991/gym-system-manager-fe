@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoImg {
+    margin-right: 10px;
+    height: 7vh;
+}
+
+.logo {
+    font-weight: normal;
+    color: #252422;
+    margin-bottom: 5px;
+}
+
+@media (min-width: 700px) {
+    .wrapper {
+        flex-direction: row;
+    }
+
+    .wrapper > * {
+        margin-bottom: 0;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+}
