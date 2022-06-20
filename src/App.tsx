@@ -13,6 +13,6 @@ export const App = () => {
       <Header />
       <div style={{height: '100%', backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'top', backgroundRepeat: 'no-repeat', filter: 'blur(4px)', zIndex: -1}}/>
         <AuthForm/>
-    </div>
+      </div>
   );
 }
