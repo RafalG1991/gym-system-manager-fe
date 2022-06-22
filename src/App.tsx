@@ -7,16 +7,9 @@ import classes from './App.module.css';
 import {AuthForm} from "./components/AuthForm/AuthForm";
 import {AuthContext} from "./providers/AuthProvider";
 import {Navigate, Route, Routes} from "react-router-dom";
+import {UnauthorizedApp} from "./components/Layouts/UnauthorizedApp";
 
-const UnauthorizedApp = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<AuthForm />} />
-      <Route path="/login" element={<AuthForm/>}/>
-      <Route path="/signup" element={<AuthForm register={true}/>}/>
-    </Routes>
-  )
-}
+
 
 const AuthorizedApp = () => {
   return (
@@ -30,7 +23,7 @@ export const App = () => {
   return (
     <div className={classes.wrapper}>
       <Header />
-      <div style={{height: '100%', backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'top', backgroundRepeat: 'no-repeat', filter: 'blur(4px)', zIndex: -1}}/>
+
       {
         user ? <AuthorizedApp /> : <UnauthorizedApp />
       }
