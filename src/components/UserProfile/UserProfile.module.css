@@ -2,21 +2,3 @@
 
 }
 
-li > * {
-    margin: 0 10px;
-    transition: color 0.3s ease-in-out;
-}
-
-li > *:hover {
-    color: #FFFCF2;
-}
-
-.activeLink {
-    font-weight: bold;
-    color: #252422;
-}
-
-.inactiveLink {
-    color: #252422;
-    text-decoration: none;
-}
