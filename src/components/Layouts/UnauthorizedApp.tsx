@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {AuthForm} from "../AuthForm/AuthForm";
 
 import classes from './UnauthorizedApp.module.css';
@@ -11,6 +11,7 @@ export const UnauthorizedApp = () => {
       <Route path="/" element={<AuthForm />} />
       <Route path="/login" element={<AuthForm/>}/>
       <Route path="/signup" element={<AuthForm register={true}/>}/>
+      <Route path="*" element={<Navigate to="/" replace={true} />}/>
     </Routes>
   </>
 }

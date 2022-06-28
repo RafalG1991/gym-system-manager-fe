@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const AuthForm = ({register=false}: Props) => {
-  const {signIn, signUp, user} = useContext(AuthContext);
+  const {signIn, signUp} = useContext(AuthContext);
   const {
     value: loginValue,
     valueInputHandler: loginInputHandler,
@@ -19,7 +19,7 @@ export const AuthForm = ({register=false}: Props) => {
     hasError: loginHasError,
     isValid: isLoginValid,
     valueReset: loginReset,
-  } = useForm(value => value.trim() !== '');
+  } = useForm(value => value.trim() !== '' && /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value));
 
   const {
     value: passwordValue,
@@ -50,7 +50,6 @@ export const AuthForm = ({register=false}: Props) => {
 
   return (
     <Modal>
-      {user && (<Navigate to="/" replace={true}/>)}
       <h2>{register ? 'Sign Up' : 'Sign In'}</h2>
       <form onSubmit={submitHandler}>
         <Input
@@ -59,7 +58,7 @@ export const AuthForm = ({register=false}: Props) => {
           onBlur={loginBlurHandler}
           onChange={loginInputHandler}
           hasError={loginHasError}
-          errMsg={'Login must not be empty'}
+          errMsg={'Login must be a valid e-mail address'}
         >
           Login
         </Input>
