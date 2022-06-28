@@ -1,7 +1,11 @@
 import React from "react";
+import {Route, Routes} from "react-router-dom";
+import {UserProfile} from "../UserProfile/UserProfile";
 
 export const AuthorizedApp = () => {
   return (
-    <h1>This is authorized app</h1>
-  )
+      <Routes>
+        <Route path="/" element={<UserProfile />} />
+      </Routes>
+  );
 }
