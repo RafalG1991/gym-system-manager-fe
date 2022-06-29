@@ -27,5 +27,6 @@ export const useForm = (validationFunction: (value: string) => boolean) => {
     valueInputHandler,
     valueBlurHandler,
     valueReset,
+    setValue,
   }
 }

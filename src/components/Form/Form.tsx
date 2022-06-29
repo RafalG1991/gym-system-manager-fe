@@ -8,7 +8,12 @@ import {Link} from "react-router-dom";
 import {AuthContext} from "../../providers/AuthProvider";
 import {Modal} from "../Modal/Modal";
 
-export const Form = () => {
+interface optionalInitialValues {
+  firstName?: string;
+  lastName?: string;
+}
+
+export const Form = ({firstName, lastName}: optionalInitialValues) => {
   const {user} = useContext(AuthContext);
   const [isLoading,setIsLoading] = useState(false);
   const [id, setId] = useState('');
@@ -20,6 +25,7 @@ export const Form = () => {
     hasError: firstNameHasError,
     isValid: isFirstNameValid,
     valueReset: firstNameReset,
+    setValue: setFirstName,
   } = useForm(value => value.trim() !== '');
 
   const {
@@ -29,12 +35,18 @@ export const Form = () => {
     hasError: lastNameHasError,
     isValid: isLastNameValid,
     valueReset: lastNameReset,
+    setValue: setLastName,
   } = useForm(value => value.trim() !== '');
 
   let isFormValid = false;
 
   if(isFirstNameValid && isLastNameValid) {
     isFormValid = true;
+  }
+
+  if(!firstNameValue && !lastNameValue && firstName && lastName) {
+    setFirstName(firstName);
+    setLastName(lastName);
   }
 
   const submitHandler = async (e: FormEvent) => {
