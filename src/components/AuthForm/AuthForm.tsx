@@ -41,8 +41,10 @@ export const AuthForm = ({register=false}: Props) => {
 
   let isFormValid = false;
 
-  if(isLoginValid && isPasswordValid && isConfirmPasswordValid) {
-    isFormValid = true;
+  if (register) {
+    isFormValid = isLoginValid && isPasswordValid && isConfirmPasswordValid;
+  } else {
+    isFormValid = isLoginValid && isPasswordValid;
   }
 
   const submitHandler = async (e: FormEvent) => {
