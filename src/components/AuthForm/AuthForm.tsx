@@ -30,9 +30,18 @@ export const AuthForm = ({register=false}: Props) => {
     valueReset: passwordReset,
   } = useForm(value => value.trim().length > 8);
 
+  const {
+    value: confirmPasswordValue,
+    valueInputHandler: confirmPasswordInputHandler,
+    valueBlurHandler: confirmPasswordBlurHandler,
+    hasError: confirmPasswordHasError,
+    isValid: isConfirmPasswordValid,
+    valueReset: confirmPasswordReset,
+  } = useForm(value => value === passwordValue);
+
   let isFormValid = false;
 
-  if(isLoginValid && isPasswordValid) {
+  if(isLoginValid && isPasswordValid && isConfirmPasswordValid) {
     isFormValid = true;
   }
 
@@ -46,6 +55,7 @@ export const AuthForm = ({register=false}: Props) => {
     }
     loginReset();
     passwordReset();
+    confirmPasswordReset();
   }
 
   return (
@@ -73,6 +83,19 @@ export const AuthForm = ({register=false}: Props) => {
         >
           Password
         </Input>
+        {
+          register ? <Input
+            id='confirmPassword'
+            type='password'
+            value={confirmPasswordValue}
+            onBlur={confirmPasswordBlurHandler}
+            onChange={confirmPasswordInputHandler}
+            hasError={confirmPasswordHasError}
+            errMsg={'The password confirmation must match entered password.'}
+          >
+            Confirm Password
+          </Input> : null
+        }
         <Button disabled={!isFormValid}>{register ? 'Sign up' : 'Sign in'}</Button>
       </form>
     </Modal>
