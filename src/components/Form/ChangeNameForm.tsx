@@ -1,19 +1,19 @@
 import React, {FormEvent, useContext, useState} from 'react';
 import {Button} from "../utilities/Button/Button";
 import {Input} from "../Input/Input";
-
-import classes from './Form.module.css';
 import {useForm} from "../../hooks/use-form";
 import {AuthContext} from "../../providers/AuthProvider";
-import {Modal} from "../Modal/Modal";
 import {Loader} from "../utilities/Loader/Loader";
+
+import classes from './Form.module.css';
 
 interface optionalInitialValues {
   firstName?: string;
   lastName?: string;
+  triggerReload: (id: string) => void;
 }
 
-export const Form = ({firstName, lastName}: optionalInitialValues) => {
+export const ChangeNameForm = ({firstName, lastName, triggerReload}: optionalInitialValues) => {
   const {user} = useContext(AuthContext);
   const [isLoading,setIsLoading] = useState(false);
   const [id, setId] = useState('');
@@ -40,7 +40,7 @@ export const Form = ({firstName, lastName}: optionalInitialValues) => {
 
   let isFormValid = false;
 
-  if(isFirstNameValid && isLastNameValid) {
+  if(isFirstNameValid && isLastNameValid && (firstNameValue !== firstName || lastNameValue !== lastName)) {
     isFormValid = true;
   }
 
@@ -74,16 +74,22 @@ export const Form = ({firstName, lastName}: optionalInitialValues) => {
     lastNameReset();
   }
 
+  const reloadInputData = () => {
+    triggerReload(id);
+    setId('');
+  }
+
   if(isLoading) {
     return <Loader />
   }
 
   return (
     <form className={classes.wrapper} onSubmit={submitHandler}>
-      {id ? <div className={classes.inputs}>
+      {id ? <div className={classes.updateinfo}>
         <p>Your data has successfully been changed!</p>
-        <Button onClick={() => setId('')}>Change again!</Button>
+        <Button onClick={reloadInputData}>Change again!</Button>
       </div> : <>
+        <h3>Change your name:</h3>
         <div className={classes.inputs}>
           <Input
             id='firstName'
@@ -102,7 +108,7 @@ export const Form = ({firstName, lastName}: optionalInitialValues) => {
             errMsg={'Last name must not be empty and maximum length is 50 characters'}
           >Last name</Input>
         </div>
-        <Button disabled={!isFormValid}>Submit</Button>
+        <Button disabled={!isFormValid}>Change name</Button>
       </>
       }
     </form>

@@ -11,7 +11,22 @@
     padding: 10px;
 }
 
-@media (min-width: 720px) {
+.updateinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10%;
+}
+
+.updateinfo p {
+    margin-bottom: 5px;
+}
+
+.updateinfo button {
+    width: 50%;
+}
+
+@media (min-width: 700px) {
     .wrapper {
         margin: 20px auto;
         align-items: center;
@@ -27,5 +42,9 @@
     .inputs {
         display: flex;
         flex-direction: column;
+    }
+
+    .updateinfo button {
+        width: 50%;
     }
 }

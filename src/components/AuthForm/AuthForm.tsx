@@ -3,7 +3,6 @@ import {Input} from "../Input/Input";
 import {useForm} from "../../hooks/use-form";
 import {AuthContext} from "../../providers/AuthProvider";
 import {Button} from "../utilities/Button/Button";
-import {Navigate} from "react-router-dom";
 import {Modal} from "../Modal/Modal";
 
 interface Props {
