@@ -14,8 +14,7 @@
 @media (min-width: 720px) {
     .wrapper {
         margin: 20px auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr;
+        align-items: center;
     }
 
     .wrapper button {
@@ -25,7 +24,7 @@
         padding: 5px;
     }
 
-    .advert {
+    .inputs {
         display: flex;
         flex-direction: column;
     }

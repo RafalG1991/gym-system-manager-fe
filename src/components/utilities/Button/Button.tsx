@@ -5,9 +5,10 @@ import classes from './Button.module.css';
 interface Props {
   children: React.ReactNode,
   disabled?: boolean,
+  onClick?: () => void,
 }
 
-export const Button = ({children, disabled=false}: Props) => {
+export const Button = ({children, disabled=false, onClick}: Props) => {
 
-  return <button disabled={disabled} className={disabled ? classes.btnDisabled : classes.btn}>{children}</button>
+  return <button onClick={onClick} disabled={disabled} className={disabled ? classes.btnDisabled : classes.btn}>{children}</button>
 }

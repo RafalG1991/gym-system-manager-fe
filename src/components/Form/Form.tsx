@@ -4,9 +4,9 @@ import {Input} from "../Input/Input";
 
 import classes from './Form.module.css';
 import {useForm} from "../../hooks/use-form";
-import {Link} from "react-router-dom";
 import {AuthContext} from "../../providers/AuthProvider";
 import {Modal} from "../Modal/Modal";
+import {Loader} from "../utilities/Loader/Loader";
 
 interface optionalInitialValues {
   firstName?: string;
@@ -50,79 +50,61 @@ export const Form = ({firstName, lastName}: optionalInitialValues) => {
   }
 
   const submitHandler = async (e: FormEvent) => {
-    // e.preventDefault();
-    // if(!isFormValid || !user) return;
-    // setIsLoading(true);
-    // try {
-    //   const res = await fetch('/ad', {
-    //     method: 'POST',
-    //     mode: 'cors',
-    //     headers: {
-    //       'Access-Control-Allow-Origin':'origin',
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       title: titleValue,
-    //       link: linkValue,
-    //       content: contentValue,
-    //       apNumber: apartmentValue,
-    //       street: streetValue,
-    //       city: cityValue,
-    //       postal: postalValue,
-    //       public: false,
-    //       price: Number(priceValue),
-    //       userId: user.sub,
-    //     }),
-    //   });
-    //   setId(await res.json());
-    // } finally {
-    //   setIsLoading(false);
-    // }
-    // titleReset();
-    // contentReset();
-    // streetReset();
-    // apartmentReset();
-    // cityReset();
-    // postalReset();
-    // linkReset();
-    // priceReset();
+    e.preventDefault();
+    if(!isFormValid || !user) return;
+    setIsLoading(true);
+    try {
+      const res = await fetch('/user', {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin':'origin',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstname: firstNameValue,
+          lastname: lastNameValue,
+        }),
+      });
+      setId(await res.json());
+    } finally {
+      setIsLoading(false);
+    }
+    firstNameReset();
+    lastNameReset();
   }
 
-  if (isLoading) {
-    return <Modal>
-        <p>Changing data in progress...</p>
-    </Modal>
+  if(isLoading) {
+    return <Loader />
   }
-
-  if (id) {
-    return <Modal>
-          <p>Your data has successfully been changed!</p>
-          <Link to='/'>Return to profile</Link>
-    </Modal>
-  }
-
 
   return (
     <form className={classes.wrapper} onSubmit={submitHandler}>
-      <div className={classes.advert}>
-        <Input
-          id='firstName'
-          onChange={firstNameInputHandler}
-          onBlur={firstNameBlurHandler}
-          value={firstNameValue}
-          hasError={firstNameHasError}
-          errMsg={'First name must not be empty and maximum length is 50 characters'}
-        >First name</Input>
-        <Input
-          id='lastName'
-          onChange={lastNameInputHandler}
-          onBlur={lastNameBlurHandler}
-          value={lastNameValue}
-          hasError={lastNameHasError}
-          errMsg={'Last name must not be empty and maximum length is 50 characters'}
-        >Last name</Input>
-      </div>
-      <Button disabled={!isFormValid}>Submit</Button>
+      {id ? <div className={classes.inputs}>
+        <p>Your data has successfully been changed!</p>
+        <Button onClick={() => setId('')}>Change again!</Button>
+      </div> : <>
+        <div className={classes.inputs}>
+          <Input
+            id='firstName'
+            onChange={firstNameInputHandler}
+            onBlur={firstNameBlurHandler}
+            value={firstNameValue}
+            hasError={firstNameHasError}
+            errMsg={'First name must not be empty and maximum length is 50 characters'}
+          >First name</Input>
+          <Input
+            id='lastName'
+            onChange={lastNameInputHandler}
+            onBlur={lastNameBlurHandler}
+            value={lastNameValue}
+            hasError={lastNameHasError}
+            errMsg={'Last name must not be empty and maximum length is 50 characters'}
+          >Last name</Input>
+        </div>
+        <Button disabled={!isFormValid}>Submit</Button>
+      </>
+      }
     </form>
   )
 };

@@ -4,6 +4,7 @@ import {UserDataResponse} from 'types';
 
 import classes from './UserProfile.module.css';
 import {Modal} from "../Modal/Modal";
+import {Loader} from "../utilities/Loader/Loader";
 
 export const UserProfile = () => {
   const [user, setUser] = useState<UserDataResponse | null>(null);
@@ -34,9 +35,7 @@ export const UserProfile = () => {
   }, []);
 
   if (isLoading) {
-    return <Modal>
-      <p>Fetching data in progress...</p>
-    </Modal>
+    return <Loader />
   }
 
   return (
