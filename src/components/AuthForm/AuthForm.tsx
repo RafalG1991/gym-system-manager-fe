@@ -3,7 +3,6 @@ import {Input} from "../Input/Input";
 import {useForm} from "../../hooks/use-form";
 import {AuthContext} from "../../providers/AuthProvider";
 import {Button} from "../utilities/Button/Button";
-import {Navigate} from "react-router-dom";
 import {Modal} from "../Modal/Modal";
 
 interface Props {
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export const AuthForm = ({register=false}: Props) => {
-  const {signIn, signUp, user} = useContext(AuthContext);
+  const {signIn, signUp} = useContext(AuthContext);
   const {
     value: loginValue,
     valueInputHandler: loginInputHandler,
@@ -19,7 +18,7 @@ export const AuthForm = ({register=false}: Props) => {
     hasError: loginHasError,
     isValid: isLoginValid,
     valueReset: loginReset,
-  } = useForm(value => value.trim() !== '');
+  } = useForm(value => value.trim() !== '' && /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value));
 
   const {
     value: passwordValue,
@@ -30,10 +29,21 @@ export const AuthForm = ({register=false}: Props) => {
     valueReset: passwordReset,
   } = useForm(value => value.trim().length > 8);
 
+  const {
+    value: confirmPasswordValue,
+    valueInputHandler: confirmPasswordInputHandler,
+    valueBlurHandler: confirmPasswordBlurHandler,
+    hasError: confirmPasswordHasError,
+    isValid: isConfirmPasswordValid,
+    valueReset: confirmPasswordReset,
+  } = useForm(value => value === passwordValue);
+
   let isFormValid = false;
 
-  if(isLoginValid && isPasswordValid) {
-    isFormValid = true;
+  if (register) {
+    isFormValid = isLoginValid && isPasswordValid && isConfirmPasswordValid;
+  } else {
+    isFormValid = isLoginValid && isPasswordValid;
   }
 
   const submitHandler = async (e: FormEvent) => {
@@ -46,11 +56,11 @@ export const AuthForm = ({register=false}: Props) => {
     }
     loginReset();
     passwordReset();
+    confirmPasswordReset();
   }
 
   return (
     <Modal>
-      {user && (<Navigate to="/" replace={true}/>)}
       <h2>{register ? 'Sign Up' : 'Sign In'}</h2>
       <form onSubmit={submitHandler}>
         <Input
@@ -59,7 +69,7 @@ export const AuthForm = ({register=false}: Props) => {
           onBlur={loginBlurHandler}
           onChange={loginInputHandler}
           hasError={loginHasError}
-          errMsg={'Login must not be empty'}
+          errMsg={'Login must be a valid e-mail address'}
         >
           Login
         </Input>
@@ -74,6 +84,19 @@ export const AuthForm = ({register=false}: Props) => {
         >
           Password
         </Input>
+        {
+          register ? <Input
+            id='confirmPassword'
+            type='password'
+            value={confirmPasswordValue}
+            onBlur={confirmPasswordBlurHandler}
+            onChange={confirmPasswordInputHandler}
+            hasError={confirmPasswordHasError}
+            errMsg={'The password confirmation must match entered password.'}
+          >
+            Confirm Password
+          </Input> : null
+        }
         <Button disabled={!isFormValid}>{register ? 'Sign up' : 'Sign in'}</Button>
       </form>
     </Modal>

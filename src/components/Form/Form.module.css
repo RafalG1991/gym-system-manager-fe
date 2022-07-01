@@ -1,0 +1,50 @@
+.wrapper {
+    max-width: 800px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper button {
+    margin: 0 auto;
+    width: 80%;
+    padding: 10px;
+}
+
+.updateinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10%;
+}
+
+.updateinfo p {
+    margin-bottom: 5px;
+}
+
+.updateinfo button {
+    width: 50%;
+}
+
+@media (min-width: 700px) {
+    .wrapper {
+        margin: 20px auto;
+        align-items: center;
+    }
+
+    .wrapper button {
+        justify-self: center;
+        grid-column: 1/3;
+        width: 30%;
+        padding: 5px;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .updateinfo button {
+        width: 50%;
+    }
+}

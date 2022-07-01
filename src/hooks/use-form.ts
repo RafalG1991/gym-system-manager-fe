@@ -9,7 +9,6 @@ export const useForm = (validationFunction: (value: string) => boolean) => {
 
   const valueInputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    setIsTouched(true);
   }
 
   const valueBlurHandler = () => {
@@ -28,5 +27,6 @@ export const useForm = (validationFunction: (value: string) => boolean) => {
     valueInputHandler,
     valueBlurHandler,
     valueReset,
+    setValue,
   }
 }
