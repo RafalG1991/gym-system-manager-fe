@@ -1,9 +1,10 @@
-import React, {FormEvent, useContext} from 'react';
+import React, {FormEvent, useContext, useState} from 'react';
 import {Input} from "../Input/Input";
 import {useForm} from "../../hooks/use-form";
 import {AuthContext} from "../../providers/AuthProvider";
 import {Button} from "../utilities/Button/Button";
 import {Modal} from "../Modal/Modal";
+import {Loader} from "../utilities/Loader/Loader";
 
 interface Props {
   register?: boolean;
@@ -11,6 +12,7 @@ interface Props {
 
 export const AuthForm = ({register=false}: Props) => {
   const {signIn, signUp} = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     value: loginValue,
     valueInputHandler: loginInputHandler,
@@ -49,14 +51,21 @@ export const AuthForm = ({register=false}: Props) => {
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     if(!isFormValid) return;
+    setIsLoading(true);
     try {
       register ? signUp({login: loginValue, password: passwordValue}) : signIn({login: loginValue, password: passwordValue});
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
     loginReset();
     passwordReset();
     confirmPasswordReset();
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
