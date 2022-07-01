@@ -2,23 +2,7 @@
     padding: 30px;
 }
 
-.wrapper h3 {
-    margin-top: 50px;
-}
-
-.bio {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-}
-
-.data {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.data p {
-    margin: 2px;
+.wrapper h1 {
+    text-transform: uppercase;
 }
 

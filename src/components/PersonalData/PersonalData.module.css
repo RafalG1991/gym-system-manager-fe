@@ -1,0 +1,26 @@
+h3 {
+    text-transform: uppercase;
+    margin-top: 50px;
+}
+
+.bio {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.data p {
+    margin: 2px;
+}
+
+.data p span {
+    display: inline-block;
+    min-width: 150px;
+    font-weight: bold;
+}
