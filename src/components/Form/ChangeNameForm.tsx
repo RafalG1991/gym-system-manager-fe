@@ -6,17 +6,11 @@ import {AuthContext} from "../../providers/AuthProvider";
 import {Loader} from "../utilities/Loader/Loader";
 
 import classes from './Form.module.css';
+import {UserDataContext} from "../../providers/UserDataProvider";
 
-interface optionalInitialValues {
-  firstName?: string;
-  lastName?: string;
-  triggerReload: (id: string) => void;
-}
-
-export const ChangeNameForm = ({firstName, lastName, triggerReload}: optionalInitialValues) => {
+export const ChangeNameForm = () => {
   const {user} = useContext(AuthContext);
-  const [isLoading,setIsLoading] = useState(false);
-  const [id, setId] = useState('');
+  const {userData, changeName, idName, isLoading, setIdName} = useContext(UserDataContext);
 
   const {
     value: firstNameValue,
@@ -38,45 +32,32 @@ export const ChangeNameForm = ({firstName, lastName, triggerReload}: optionalIni
     setValue: setLastName,
   } = useForm(value => value.trim() !== '');
 
+  if (!userData) {
+    return <>
+      <Loader />
+      <p>Loading Data Error</p>
+    </>
+  }
+
   let isFormValid = false;
 
-  if(isFirstNameValid && isLastNameValid && (firstNameValue !== firstName || lastNameValue !== lastName)) {
+  if(isFirstNameValid && isLastNameValid && (firstNameValue !== userData.firstname || lastNameValue !== userData.lastname)) {
     isFormValid = true;
   }
 
-  if(!firstNameValue && !lastNameValue && firstName && lastName) {
-    setFirstName(firstName);
-    setLastName(lastName);
+  if(!firstNameValue && !lastNameValue && userData.firstname && userData.lastname) {
+    setFirstName(userData.firstname);
+    setLastName(userData.lastname);
   }
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     if(!isFormValid || !user) return;
-    setIsLoading(true);
-    try {
-      const res = await fetch('/user', {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin':'origin',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstname: firstNameValue,
-          lastname: lastNameValue,
-        }),
-      });
-      setId(await res.json());
-    } finally {
-      setIsLoading(false);
-    }
-    firstNameReset();
-    lastNameReset();
+    await changeName(firstNameValue, lastNameValue);
   }
 
   const reloadInputData = () => {
-    triggerReload(id);
-    setId('');
+    setIdName('');
   }
 
   if(isLoading) {
@@ -85,7 +66,7 @@ export const ChangeNameForm = ({firstName, lastName, triggerReload}: optionalIni
 
   return (
     <form className={classes.wrapper} onSubmit={submitHandler}>
-      {id ? <div className={classes.updateinfo}>
+      {idName ? <div className={classes.updateinfo}>
         <p>Your data has successfully been changed!</p>
         <Button onClick={reloadInputData}>Change again!</Button>
       </div> : <>

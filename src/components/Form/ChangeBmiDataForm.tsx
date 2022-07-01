@@ -6,17 +6,11 @@ import {AuthContext} from "../../providers/AuthProvider";
 import {Loader} from "../utilities/Loader/Loader";
 
 import classes from './Form.module.css';
+import {UserDataContext} from "../../providers/UserDataProvider";
 
-interface optionalInitialValues {
-  height?: string;
-  weight?: string;
-  triggerReload: (id: string) => void;
-}
-
-export const ChangeBmiDataForm = ({height, weight, triggerReload}: optionalInitialValues) => {
+export const ChangeBmiDataForm = () => {
   const {user} = useContext(AuthContext);
-  const [isLoading,setIsLoading] = useState(false);
-  const [id, setId] = useState('');
+  const {userData, changeBmi, idBmi, isLoading, setIdBmi} = useContext(UserDataContext);
 
   const {
     value: heightValue,
@@ -24,7 +18,6 @@ export const ChangeBmiDataForm = ({height, weight, triggerReload}: optionalIniti
     valueBlurHandler: heightBlurHandler,
     hasError: heightHasError,
     isValid: isHeightValid,
-    valueReset: heightReset,
     setValue: setHeight,
   } = useForm(value => value.trim().length !== 0 && Number(value) > 0 && Number(value) < 300);
 
@@ -34,49 +27,35 @@ export const ChangeBmiDataForm = ({height, weight, triggerReload}: optionalIniti
     valueBlurHandler: weightBlurHandler,
     hasError: weightHasError,
     isValid: isWeightValid,
-    valueReset: weightReset,
     setValue: setWeight,
   } = useForm(value => value.trim().length !== 0 && Number(value) > 0 && Number(value) < 999);
 
+  if (!userData) {
+    return <>
+      <Loader />
+      <p>Loading Data Error</p>
+    </>
+  }
+
   let isFormValid = false;
 
-  if(isHeightValid && isWeightValid && (heightValue !== height || weightValue !== weight)) {
+  if(isHeightValid && isWeightValid && (heightValue !== userData.height || weightValue !== userData.weight)) {
     isFormValid = true;
   }
 
-  if(!heightValue && !weightValue && height && weight) {
-    setHeight(height);
-    setWeight(weight);
+  if(!heightValue && !weightValue && userData.height && userData.weight) {
+    setHeight(userData.height);
+    setWeight(userData.weight);
   }
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     if(!isFormValid || !user) return;
-    setIsLoading(true);
-    try {
-      const res = await fetch('/user', {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin':'origin',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          height: heightValue,
-          weight: weightValue,
-        }),
-      });
-      setId(await res.json());
-    } finally {
-      setIsLoading(false);
-    }
-    heightReset();
-    weightReset();
+    await changeBmi(heightValue, weightValue);
   }
 
   const reloadInputData = () => {
-    triggerReload(id);
-    setId('');
+    setIdBmi('');
   }
 
   if(isLoading) {
@@ -85,7 +64,7 @@ export const ChangeBmiDataForm = ({height, weight, triggerReload}: optionalIniti
 
   return (
     <form className={classes.wrapper} onSubmit={submitHandler}>
-      {id ? <div className={classes.updateinfo}>
+      {idBmi ? <div className={classes.updateinfo}>
         <p>Your data has successfully been changed!</p>
         <Button onClick={reloadInputData}>Change again!</Button>
       </div> : <>
