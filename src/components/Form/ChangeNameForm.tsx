@@ -1,4 +1,4 @@
-import React, {FormEvent, useContext, useState} from 'react';
+import React, {FormEvent, useContext } from 'react';
 import {Button} from "../utilities/Button/Button";
 import {Input} from "../Input/Input";
 import {useForm} from "../../hooks/use-form";
@@ -18,7 +18,6 @@ export const ChangeNameForm = () => {
     valueBlurHandler: firstNameBlurHandler,
     hasError: firstNameHasError,
     isValid: isFirstNameValid,
-    valueReset: firstNameReset,
     setValue: setFirstName,
   } = useForm(value => value.trim() !== '');
 
@@ -28,7 +27,6 @@ export const ChangeNameForm = () => {
     valueBlurHandler: lastNameBlurHandler,
     hasError: lastNameHasError,
     isValid: isLastNameValid,
-    valueReset: lastNameReset,
     setValue: setLastName,
   } = useForm(value => value.trim() !== '');
 
