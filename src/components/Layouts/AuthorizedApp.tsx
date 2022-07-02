@@ -4,6 +4,7 @@ import {UserProfile} from "../UserProfile/UserProfile";
 import {SideMenu} from "../SideMenu/SideMenu";
 
 import classes from './AuthorizedApp.module.css';
+import {MembershipView} from "../MembershipView/MembershipView";
 
 export const AuthorizedApp = () => {
 
@@ -12,6 +13,7 @@ export const AuthorizedApp = () => {
       <SideMenu />
       <Routes>
         <Route path="/" element={<UserProfile />} />
+        <Route path="/membership" element={<MembershipView />} />
         <Route path="*" element={<Navigate to="/" replace={true} />}/>
       </Routes>
     </div>
