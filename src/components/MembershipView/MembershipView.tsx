@@ -4,6 +4,7 @@ import {Loader} from "../utilities/Loader/Loader";
 
 import classes from './MembershipView.module.css';
 import {MembershipStatus} from "../MembershipStatus/MembershipStatus";
+import {MembershipOffer} from "../MembershipOffer/MembershipOffer";
 
 
 export const MembershipView = () => {
@@ -19,6 +20,6 @@ export const MembershipView = () => {
   return <div className={classes.wrapper}>
     <h1>Membership</h1>
     <MembershipStatus />
-
+    <MembershipOffer />
   </div>
 };

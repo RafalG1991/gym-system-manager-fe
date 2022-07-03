@@ -19,12 +19,12 @@ export const MembershipStatus = () => {
   let borderColor;
   if (userData.membershipDate) {
     if ((new Date(userData.membershipDate)) < new Date()) {
-      membershipStatus = <p>Your gym pass has expired on {new Date(userData.memberSince).toLocaleDateString()}.</p>;
+      membershipStatus = <p>Your gym pass has expired on {new Date(userData.membershipDate).toLocaleDateString()}.</p>;
       backgroundColor = '#ec929d';
       borderColor = '#d70011';
 
     } else {
-      membershipStatus = <p>You have a valid gym pass till {new Date(userData.memberSince).toLocaleDateString()}</p>;
+      membershipStatus = <p>You have a valid gym pass till {new Date(userData.membershipDate).toLocaleDateString()}</p>;
       backgroundColor = '#62d552';
       borderColor = '#219522';
     }
