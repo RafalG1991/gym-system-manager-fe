@@ -3,10 +3,11 @@ import {UserDataContext} from "../../providers/UserDataProvider";
 import {Loader} from "../utilities/Loader/Loader";
 
 import classes from './MembershipView.module.css';
+import {MembershipStatus} from "../MembershipStatus/MembershipStatus";
 
 
 export const MembershipView = () => {
-  const {userData, isLoading} = useContext(UserDataContext);
+  const {userData} = useContext(UserDataContext);
 
   if(!userData) {
     return <>
@@ -15,21 +16,9 @@ export const MembershipView = () => {
     </>
   }
 
-  let membershipStatus;
-  if (userData.membershipDate) {
-    if ((new Date(userData.membershipDate)) < new Date()) {
-      membershipStatus = <p>Your membership has ended!</p>;
-    } else {
-      membershipStatus = <p>You have valid membership!</p>;
-    }
-  } else {
-    membershipStatus = <p>You have no membership! Buy one!</p>
-  }
-
   return <div className={classes.wrapper}>
     <h1>Membership</h1>
-    <div className={classes.status}>
-      {membershipStatus}
-    </div>
+    <MembershipStatus />
+
   </div>
 };

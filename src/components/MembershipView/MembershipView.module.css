@@ -5,16 +5,3 @@
 .wrapper h1 {
     text-transform: uppercase;
 }
-
-.status {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    background-color: #ec929d;
-    border: 2px solid #d70011;
-}
-
-.status p {
-    font-weight: bold;
-}
