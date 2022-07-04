@@ -1,0 +1,29 @@
+.offerWrapper {
+    margin-top: 50px;
+    padding: 20px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid #EB5E28;
+    flex: 1 1 0px;
+}
+
+.offerTitle {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.offerDescription {
+    text-align: justify;
+    font-size: 16px;
+    padding: 10px 5px 10px;
+    flex-grow: 1;
+}
+
+.offerPrice {
+    font-weight: bold;
+    font-size: 24px;
+}

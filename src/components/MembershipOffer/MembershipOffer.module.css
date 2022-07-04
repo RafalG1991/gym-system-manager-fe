@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.offersWrapper {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.offersSuccess {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding: 20px 10px 10px;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid #EB5E28;
+}
+
+@media (min-width: 700px) {
+    .offersWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 5vw;
+    }
+}

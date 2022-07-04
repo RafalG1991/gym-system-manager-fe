@@ -1,15 +1,19 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React, {FormEvent, useContext, useEffect, useState} from 'react';
 import { UserDataResponse } from 'types';
+import {AuthContext} from "./AuthProvider";
 
 interface AuthContextObj {
   userData: UserDataResponse | null;
   isLoading: boolean;
   changeBmi: (newHeight: string, newWeight: string) => Promise<void>;
   changeName: (firstName: string, lastName: string) => Promise<void>;
+  extendMembership: (months: number) => Promise<void>;
   idName: string;
   idBmi: string;
+  idMembership: string;
   setIdName: (id: string) => void;
   setIdBmi: (id: string) => void;
+  setIdMembership: (id: string) => void;
 }
 
 export const UserDataContext = React.createContext<AuthContextObj>({
@@ -17,10 +21,13 @@ export const UserDataContext = React.createContext<AuthContextObj>({
   isLoading: false,
   changeBmi: async () => {},
   changeName: async () => {},
+  extendMembership: async () => {},
   idName: '',
   idBmi: '',
+  idMembership: '',
   setIdName: () => {},
   setIdBmi: () => {},
+  setIdMembership: () => {},
 });
 
 export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
@@ -28,6 +35,8 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
   const [isLoading,setIsLoading] = useState(false);
   const [idName, setIdName] = useState('');
   const [idBmi, setIdBmi] = useState('');
+  const [idMembership, setIdMembership] = useState('');
+  const {signOut} = useContext(AuthContext);
 
   useEffect(() => {
     const login = localStorage.getItem('login');
@@ -54,7 +63,7 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
         }
       }
     })();
-  }, [idName, idBmi]);
+  }, [idName, idBmi, idMembership]);
 
   const changeBmi = async (newHeight: string, newWeight: string) => {
     setIsLoading(true);
@@ -71,7 +80,11 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
           weight: newWeight,
         }),
       });
-      setIdBmi(await res.json());
+      if (res.ok) {
+        setIdBmi(await res.json());
+      } else {
+        signOut();
+      }
     } finally {
       setIsLoading(false);
     }
@@ -92,14 +105,42 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
           lastname: lastName,
         }),
       });
-      setIdName(await res.json());
+      if (res.ok) {
+        setIdName(await res.json());
+      } else {
+        signOut();
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const extendMembership = async (months: number) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/user/membership', {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin':'origin',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          months,
+        }),
+      });
+      if (res.ok) {
+        setIdMembership(await res.json());
+      } else {
+        signOut();
+      }
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <UserDataContext.Provider value={{ userData, isLoading, changeBmi, idName, setIdName, idBmi, setIdBmi, changeName }} >
+    <UserDataContext.Provider value={{ userData, isLoading, changeBmi, idName, setIdName, idBmi, setIdBmi, changeName, extendMembership, idMembership, setIdMembership}} >
       {children}
     </UserDataContext.Provider>
   );

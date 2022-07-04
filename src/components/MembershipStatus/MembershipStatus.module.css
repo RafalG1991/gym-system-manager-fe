@@ -1,0 +1,13 @@
+.status {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.status p {
+    font-weight: bold;
+}
