@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom";
 
 interface LoginData {
   login: string;
@@ -21,6 +22,7 @@ export const AuthContext = React.createContext<AuthContextObj>({
 
 export const AuthProvider = ({children}: {children: React.ReactNode}) => {
   const [user, setUser] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const login = localStorage.getItem('login');
@@ -40,14 +42,14 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
             console.log(data);
             setUser(data);
           } else {
-            localStorage.removeItem('login');
+            signOut();
           }
         } catch (e) {
           console.log(e);
         }
       })();
     }
-  }, []);
+  }, [location]);
 
   const signUp = async ({ login, password }: LoginData) => {
     try {

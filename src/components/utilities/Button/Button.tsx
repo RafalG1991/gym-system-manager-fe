@@ -3,9 +3,9 @@ import React from 'react';
 import classes from './Button.module.css';
 
 interface Props {
-  children: React.ReactNode,
-  disabled?: boolean,
-  onClick?: () => void,
+  children: React.ReactNode;
+  disabled?: boolean;
+  onClick?: (() => void) | (() => Promise<void>);
 }
 
 export const Button = ({children, disabled=false, onClick}: Props) => {
