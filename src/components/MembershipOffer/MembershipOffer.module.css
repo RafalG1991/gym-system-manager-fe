@@ -4,28 +4,13 @@
 }
 
 .offersWrapper {
-    display: flex;
-    gap: 20px;
-}
-
-.offerWrapper {
-    margin-top: 50px;
-    padding: 20px 10px 10px;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    border: 2px solid #EB5E28;
 }
 
-.offerTitle {
-    text-align: center;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.offerDescription {
-    text-align: justify;
-    font-size: 12px;
-    padding: 10px 5px 10px;
+@media (min-width: 700px) {
+    .offersWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 5vw;
+    }
 }
