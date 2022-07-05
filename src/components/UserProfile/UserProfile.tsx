@@ -8,6 +8,7 @@ import {BmiData} from "../BmiData/BmiData";
 
 import classes from './UserProfile.module.css';
 import {UserDataContext} from "../../providers/UserDataProvider";
+import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
 
 export const UserProfile = () => {
   const {userData, isLoading} = useContext(UserDataContext);
@@ -17,10 +18,7 @@ export const UserProfile = () => {
   }
 
   if (!userData) {
-    return <>
-      <Loader />
-      <p>Loading Data Error</p>
-    </>
+    return <ErrorMessage />
   }
 
   return (

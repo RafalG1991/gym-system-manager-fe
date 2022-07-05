@@ -7,6 +7,7 @@ import {Loader} from "../utilities/Loader/Loader";
 
 import classes from './Form.module.css';
 import {UserDataContext} from "../../providers/UserDataProvider";
+import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
 
 export const ChangeNameForm = () => {
   const {user} = useContext(AuthContext);
@@ -31,10 +32,7 @@ export const ChangeNameForm = () => {
   } = useForm(value => value.trim() !== '');
 
   if (!userData) {
-    return <>
-      <Loader />
-      <p>Loading Data Error</p>
-    </>
+    return <ErrorMessage />
   }
 
   let isFormValid = false;

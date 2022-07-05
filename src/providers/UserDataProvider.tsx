@@ -1,6 +1,7 @@
 import React, {FormEvent, useContext, useEffect, useState} from 'react';
 import { UserDataResponse } from 'types';
 import {AuthContext} from "./AuthProvider";
+import {useError} from "../hooks/use-error";
 
 interface AuthContextObj {
   userData: UserDataResponse | null;
@@ -37,6 +38,7 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
   const [idBmi, setIdBmi] = useState('');
   const [idMembership, setIdMembership] = useState('');
   const {signOut} = useContext(AuthContext);
+  const {dispatchError} = useError();
 
   useEffect(() => {
     const login = localStorage.getItem('login');
@@ -52,18 +54,20 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
               "Content-Type": "application/json",
             }
           });
+          const data = await res.json();
           if (res.ok) {
-            const data = await res.json();
             setUserData(data);
+          } else {
+            dispatchError(data.err);
           }
         } catch (e) {
-          console.log(e);
+          dispatchError();
         } finally {
           setIsLoading(false);
         }
       }
     })();
-  }, [idName, idBmi, idMembership]);
+  }, [idName, idBmi, idMembership, dispatchError]);
 
   const changeBmi = async (newHeight: string, newWeight: string) => {
     setIsLoading(true);
@@ -80,11 +84,15 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
           weight: newWeight,
         }),
       });
+      const data = await res.json();
       if (res.ok) {
-        setIdBmi(await res.json());
+        setIdBmi(data);
       } else {
+        dispatchError(data.err);
         signOut();
       }
+    }  catch (e) {
+      dispatchError();
     } finally {
       setIsLoading(false);
     }
@@ -105,11 +113,15 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
           lastname: lastName,
         }),
       });
+      const data = await res.json();
       if (res.ok) {
-        setIdName(await res.json());
+        setIdName(data);
       } else {
+        dispatchError(data.err);
         signOut();
       }
+    } catch (e) {
+      dispatchError();
     } finally {
       setIsLoading(false);
     }
@@ -129,11 +141,15 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
           months,
         }),
       });
+      const data = await res.json();
       if (res.ok) {
-        setIdMembership(await res.json());
+        setIdMembership(data);
       } else {
+        dispatchError(data.err)
         signOut();
       }
+    } catch (e) {
+      dispatchError();
     } finally {
       setIsLoading(false);
     }

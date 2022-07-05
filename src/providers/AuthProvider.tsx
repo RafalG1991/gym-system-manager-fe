@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
+import {useError} from "../hooks/use-error";
 
 interface LoginData {
   login: string;
@@ -15,12 +16,13 @@ interface AuthContextObj {
 
 export const AuthContext = React.createContext<AuthContextObj>({
   user: null,
-  signIn: ({login, password}: LoginData) => {},
-  signUp: ({login, password}: LoginData) => {},
+  signIn: () => {},
+  signUp: () => {},
   signOut: () => {}
 });
 
 export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+  const { dispatchError } = useError();
   const [user, setUser] = useState(null);
   const location = useLocation();
 
@@ -39,17 +41,16 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
           });
           if(res.ok) {
             const data = await res.json();
-            console.log(data);
             setUser(data);
           } else {
             signOut();
           }
         } catch (e) {
-          console.log(e);
+          dispatchError();
         }
       })();
     }
-  }, [location]);
+  }, [location, dispatchError]);
 
   const signUp = async ({ login, password }: LoginData) => {
     try {
@@ -65,13 +66,15 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
           password,
         }),
       });
+      const data = await res.json();
       if(res.ok) {
-        const data = await res.json();
         localStorage.setItem('login', 'true');
         setUser(data);
+      } else {
+        dispatchError(data.err);
       }
     } catch (e) {
-      console.log(e);
+      dispatchError();
     }
   };
 
@@ -89,13 +92,15 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
           password,
         }),
       });
+      const data = await res.json();
       if(res.ok) {
-        const data = await res.json();
         localStorage.setItem('login', 'true');
         setUser(data);
+      } else {
+        dispatchError(data.err);
       }
     } catch (e) {
-      console.log(e);
+      dispatchError();
     }
   };
 

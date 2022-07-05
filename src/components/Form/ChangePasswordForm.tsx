@@ -4,11 +4,14 @@ import {Input} from "../Input/Input";
 import {useForm} from "../../hooks/use-form";
 import {AuthContext} from "../../providers/AuthProvider";
 import {Loader} from "../utilities/Loader/Loader";
+import {useError} from "../../hooks/use-error";
+
 
 import classes from './Form.module.css';
 
 export const ChangePasswordForm = () => {
   const {user} = useContext(AuthContext);
+  const {dispatchError} = useError();
   const [isLoading,setIsLoading] = useState(false);
   const [id, setId] = useState('');
 
@@ -52,7 +55,14 @@ export const ChangePasswordForm = () => {
           password: passwordValue,
         }),
       });
-      setId(await res.json());
+      const resp = await res.json();
+      if (res.ok) {
+        setId(resp);
+      } else {
+        dispatchError('Error occurred, password has not been changed!');
+      }
+    } catch(e) {
+      dispatchError();
     } finally {
       setIsLoading(false);
     }
