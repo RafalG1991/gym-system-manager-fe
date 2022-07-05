@@ -16,8 +16,8 @@ interface AuthContextObj {
 
 export const AuthContext = React.createContext<AuthContextObj>({
   user: null,
-  signIn: ({login, password}: LoginData) => {},
-  signUp: ({login, password}: LoginData) => {},
+  signIn: () => {},
+  signUp: () => {},
   signOut: () => {}
 });
 
