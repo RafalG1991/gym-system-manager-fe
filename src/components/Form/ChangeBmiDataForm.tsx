@@ -7,6 +7,7 @@ import {Loader} from "../utilities/Loader/Loader";
 
 import classes from './Form.module.css';
 import {UserDataContext} from "../../providers/UserDataProvider";
+import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
 
 export const ChangeBmiDataForm = () => {
   const {user} = useContext(AuthContext);
@@ -31,10 +32,7 @@ export const ChangeBmiDataForm = () => {
   } = useForm(value => value.trim().length !== 0 && Number(value) > 0 && Number(value) < 999);
 
   if (!userData) {
-    return <>
-      <Loader />
-      <p>Loading Data Error</p>
-    </>
+    return <ErrorMessage />
   }
 
   let isFormValid = false;

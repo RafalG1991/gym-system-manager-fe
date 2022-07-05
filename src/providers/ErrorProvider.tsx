@@ -2,7 +2,7 @@ import React, {useCallback, useState} from "react";
 
 interface ErrorContextObj {
   error: string | null;
-  dispatchError: (message: string) => void;
+  dispatchError: (message?: string) => void;
 }
 
 export const ErrorContext = React.createContext<ErrorContextObj>({
@@ -13,7 +13,7 @@ export const ErrorContext = React.createContext<ErrorContextObj>({
 export const ErrorProvider = ({ children }: { children: React.ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
 
-  const dispatchError = useCallback((message: string) => {
+  const dispatchError = useCallback((message: string = 'Something went wrong. Please try again, or contact our support') => {
     setError(message);
     setTimeout(() => {
       setError(null);

@@ -1,0 +1,69 @@
+@keyframes shrink {
+  from {
+    transform: translateX(-50%) scaleX(1);
+  }
+  to {
+    transform: translateX(-50%) scaleX(0);
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-50%) translateY(500%);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.errorWindow {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden !important;
+}
+
+.wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10%;
+  background-color: white;
+  padding: 40px 40px 25px;
+  color: #ff8383;
+  border: 3px solid #ff8383;
+  border-radius: 15px;
+  animation: slide 1s ease-in-out 1 forwards,
+    slide 1s 6s ease-in-out 1 reverse forwards;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #ff8383;
+}
+
+.wrapper::before,
+.wrapper::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  transform: translateX(-50%);
+  background-color: #ff8383;
+  opacity: 0.8;
+  width: 60px;
+  height: 5px;
+  border-radius: 50px;
+}
+
+.wrapper::before {
+  opacity: 0.5;
+}
+
+.wrapper::after {
+  transform: translateX(-50%) scaleX(0.2);
+  transform-origin: left top;
+  animation: shrink 5s 1s linear 1 forwards;
+}
