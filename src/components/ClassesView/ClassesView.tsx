@@ -2,10 +2,17 @@ import React, {useEffect, useState} from 'react';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {useError} from "../../hooks/use-error";
-
-import classes from './ClassesView.module.css';
 import {Loader} from "../utilities/Loader/Loader";
 import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
+
+import classes from './ClassesView.module.css';
+
+const views = {
+  dayGridThreeDay: {
+    type: 'timeGridWeek',
+    duration: { days: 3 }
+  }
+}
 
 export const ClassesView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,9 +59,13 @@ export const ClassesView = () => {
     <FullCalendar
       allDaySlot={false}
       plugins={[ timeGridPlugin ]}
-      initialView="timeGridWeek"
+      initialView="dayGridThreeDay"
+      views={views}
       events={events}
       nowIndicator={true}
+      slotMinTime="09:00:00"
+      slotMaxTime="20:00:00"
+      height={620}
     />
   </div>
 }
