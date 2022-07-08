@@ -45,7 +45,6 @@ export const Calendar = ({getIdOnClick}: Props) => {
         const data = await res.json();
         if (res.ok) {
           setEvents(data);
-          console.log(data);
         } else {
           dispatchError(data.err);
         }
