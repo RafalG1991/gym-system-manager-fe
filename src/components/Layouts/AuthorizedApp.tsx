@@ -15,7 +15,7 @@ export const AuthorizedApp = () => {
       <Routes>
         <Route path="/" element={<UserProfile />} />
         <Route path="/membership" element={<MembershipView />} />
-        <Route path="/classes" element={<ClassesView />} />
+        <Route path="/classes/*" element={<ClassesView />} />
         <Route path="*" element={<Navigate to="/" replace={true} />}/>
       </Routes>
     </div>
