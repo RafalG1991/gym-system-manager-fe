@@ -1,0 +1,48 @@
+@keyframes shrink {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.wrapper h1 {
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.backButton {
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    color: #252422;
+    width: 50px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.backButton:hover {
+    color: #EB5E28;
+}
+
+.backButton::before {
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 100%;
+    background-color: #EB5E28;
+    left: 0;
+    bottom: -10px;
+}
+
+.backButton:hover::before {
+    animation: shrink 0.3s 0.2s ease-in-out 1 forwards;
+}
+

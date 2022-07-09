@@ -1,0 +1,17 @@
+p {
+    font-size: 16px;
+}
+
+.highlightedText {
+    font-size: 32px;
+    font-weight: bold;
+    color: #EB5E28;
+}
+
+.description {
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid #EB5E28;
+    border-radius: 10px;
+    text-align: justify;
+}

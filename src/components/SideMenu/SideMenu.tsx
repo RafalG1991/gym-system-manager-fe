@@ -12,7 +12,7 @@ export const SideMenu = () => (<nav>
     <NavLink to='/membership' className={({ isActive }) => isActive ? classes.activeLink : classes.inactiveLink}>Membership</NavLink>
     </li>
     <li>
-    <NavLink to='/' className={({ isActive }) => isActive ? classes.activeLink : classes.inactiveLink}>Classes</NavLink>
+    <NavLink to='/classes' className={({ isActive }) => isActive ? classes.activeLink : classes.inactiveLink}>Classes</NavLink>
     </li>
   </ul>
 </nav>);

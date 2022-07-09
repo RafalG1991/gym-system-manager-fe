@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.wrapper h1 {
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
