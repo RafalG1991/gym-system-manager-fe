@@ -4,6 +4,5 @@
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
-    filter: blur(4px);
     z-index: -1;
 }
