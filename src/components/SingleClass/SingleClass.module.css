@@ -20,7 +20,7 @@
 
 .backButton {
     position: relative;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #252422;
     width: 50px;
@@ -46,20 +46,3 @@
     animation: shrink 0.3s 0.2s ease-in-out 1 forwards;
 }
 
-p {
-    font-size: 16px;
-}
-
-.highlightedText {
-    font-size: 32px;
-    font-weight: bold;
-    color: #EB5E28;
-}
-
-.description {
-    padding: 20px;
-    margin: 20px 0;
-    border: 2px solid #EB5E28;
-    border-radius: 10px;
-    text-align: justify;
-}
