@@ -31,7 +31,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     if (login) {
       (async () => {
         try {
-          const res = await fetch('/user/me', {
+          const res = await fetch('/api/user/me', {
             credentials: "include",
             mode: 'cors',
             headers: {
@@ -54,7 +54,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
 
   const signUp = async ({ login, password }: LoginData) => {
     try {
-      const res = await fetch('/user/signup', {
+      const res = await fetch('api/user/signup', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -80,7 +80,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
 
   const signIn = async ({ login, password }: LoginData) => {
     try {
-      const res = await fetch('/user/login', {
+      const res = await fetch('api/user/login', {
         method: 'POST',
         mode: 'cors',
         headers: {

@@ -44,7 +44,7 @@ export const ChangePasswordForm = () => {
     if(!isFormValid || !user) return;
     setIsLoading(true);
     try {
-      const res = await fetch('/user', {
+      const res = await fetch('api/user', {
         method: 'PATCH',
         mode: 'cors',
         headers: {

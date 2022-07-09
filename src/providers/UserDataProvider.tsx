@@ -46,7 +46,7 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
       if (login) {
         setIsLoading(true);
         try {
-          const res = await fetch('/user/data', {
+          const res = await fetch('api/user/data', {
             credentials: "include",
             mode: 'cors',
             headers: {
@@ -72,7 +72,7 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
   const changeBmi = async (newHeight: string, newWeight: string) => {
     setIsLoading(true);
     try {
-      const res = await fetch('/user', {
+      const res = await fetch('api/user', {
         method: 'PATCH',
         mode: 'cors',
         headers: {
@@ -101,7 +101,7 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
   const changeName = async (firstName: string, lastName: string) => {
     setIsLoading(true);
     try {
-      const res = await fetch('/user', {
+      const res = await fetch('api/user', {
         method: 'PATCH',
         mode: 'cors',
         headers: {
@@ -130,7 +130,7 @@ export const UserDataProvider = ({children}: {children: React.ReactNode}) => {
   const extendMembership = async (months: number) => {
     setIsLoading(true);
     try {
-      const res = await fetch('/user/membership', {
+      const res = await fetch('api/user/membership', {
         method: 'PATCH',
         mode: 'cors',
         headers: {

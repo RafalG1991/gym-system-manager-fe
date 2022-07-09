@@ -27,14 +27,14 @@ export const Calendar = ({getIdOnClick}: Props) => {
   const clickHandler = (info: EventClickArg) => {
     info.jsEvent.preventDefault();
     getIdOnClick(info.event._def.publicId);
-    navigate(info.event._def.url);
+    navigate(info.event._def.url, {replace: true});
   }
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       try {
-        const res = await fetch('/class', {
+        const res = await fetch(`api/class`, {
           credentials: "include",
           mode: 'cors',
           headers: {

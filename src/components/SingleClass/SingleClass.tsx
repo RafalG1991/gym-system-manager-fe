@@ -20,7 +20,7 @@ export const SingleClass = ({eventId}: Props) => {
     (async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`/class/${eventId}`, {
+        const res = await fetch(`/api/class/${eventId}`, {
           credentials: "include",
           mode: 'cors',
           headers: {
