@@ -47,7 +47,8 @@
   "devDependencies": {
     "@types/leaflet": "^1.7.10",
     "customize-cra": "^1.0.0",
+    "cypress": "^10.3.0",
     "react-app-rewire-alias": "^1.1.7"
   },
-  "proxy": "http://localhost:3001/api"
+  "proxy": "http://localhost:3001"
 }
