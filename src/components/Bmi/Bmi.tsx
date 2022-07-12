@@ -25,6 +25,7 @@ export const Bmi = ({bmi}: Props) => {
   return <div
       className={classes.grade}
       style={{ backgroundColor: gradeColor }}
+      data-testid="bmiGrade-element"
     >
       {bmi}
     </div>

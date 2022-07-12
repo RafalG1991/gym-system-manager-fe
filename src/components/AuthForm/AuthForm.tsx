@@ -29,7 +29,7 @@ export const AuthForm = ({register=false}: Props) => {
     hasError: passwordHasError,
     isValid: isPasswordValid,
     valueReset: passwordReset,
-  } = useForm(value => value.trim().length > 8);
+  } = useForm(value => value.trim().length >= 8);
 
   const {
     value: confirmPasswordValue,
