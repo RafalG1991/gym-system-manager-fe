@@ -1,8 +1,12 @@
 # GYM System Manager Project
 
-Gym management web application that allows you to support clients accounts, gym passes and gym classes life schedule. Track upcoming events, calculate your BMI, check your membership status and prolong your gym pass.
+Gym management web application that allows you to support clients accounts, gym passes and gym classes live schedule. Track upcoming events, calculate your BMI, check your membership status and prolong your gym pass.
 
 This is the frontend part of the project. To see the backend part visit: https://github.com/RafalG1991/gym-system-manager-be
+
+## Live preview
+
+https://rg.networkmanager.pl/
 
 ## Tech stack
 
@@ -57,7 +61,7 @@ Builds the app for production to the `build` folder.
 
 ### `npm run cy:run`
 
-Launches e2e Cypress tests in 
+Launches e2e Cypress tests
 
 ### `npm run eject`
 
