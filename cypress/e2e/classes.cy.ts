@@ -15,7 +15,7 @@ describe('empty spec', () => {
     cy.wait(2000);
     cy.get('.fc-event-title-container').first().invoke('text').then((text1) => {
       cy.contains('div', text1).click();
-
+      cy.wait(2000);
       cy.get('h1').eq(1).invoke('text').should((text2) => {
         expect(text1).to.equal(text2);
       });
