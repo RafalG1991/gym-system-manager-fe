@@ -27,6 +27,6 @@ export const Bmi = ({bmi}: Props) => {
       style={{ backgroundColor: gradeColor }}
       data-testid="bmiGrade-element"
     >
-      {bmi}
+      { isNaN(Number(bmi)) ? '' : bmi }
     </div>
 };
