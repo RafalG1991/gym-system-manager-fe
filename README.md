@@ -75,13 +75,13 @@ This project uses React Router v6 with different views and paths for authenticat
 
 ![notifications](https://user-images.githubusercontent.com/92755273/190813250-21252e5a-f002-43e5-8d7b-fdd6fa26817a.gif)
 
-## Tests
+## 🎛 Tests
 
 The project was supplied with react-testing-library tests for AuthForm and Bmi components.
 
 e2e tests are made in Cypress and cover signing in and signing up, changing user data, extending membership and view single gym class from the schedule.
 
-## Available Scripts
+## 💾 Available Scripts
 
 In the project directory, you can run:
 
