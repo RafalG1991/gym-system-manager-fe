@@ -55,6 +55,26 @@ This project uses React Router v6 with different views and paths for authenticat
 
 ## :gem: Features
 
+#### Logging in and viewing user profile
+
+![login_profile](https://user-images.githubusercontent.com/92755273/190812573-1f9de731-0677-4e8e-90d3-cfc5cc1e3d34.gif)
+
+#### Changing user data
+
+![data_change](https://user-images.githubusercontent.com/92755273/190812713-f7656c81-d0a8-4671-803d-1fa38a7691bb.gif)
+
+#### Prolonging membership
+
+![prolong_membership](https://user-images.githubusercontent.com/92755273/190812906-99fe99fe-5ba2-49e4-b330-85dc80f3f13c.gif)
+
+#### Viewing class schedule
+
+![class_schedule](https://user-images.githubusercontent.com/92755273/190813128-ed21117f-e0f8-4ef5-9ca3-2a62a00e67e3.gif)
+
+#### Error notifications
+
+![notifications](https://user-images.githubusercontent.com/92755273/190813250-21252e5a-f002-43e5-8d7b-fdd6fa26817a.gif)
+
 ## Tests
 
 The project was supplied with react-testing-library tests for AuthForm and Bmi components.
